@@ -5,17 +5,21 @@
 package br.com.infotravel.api.commonv1;
 
 import br.com.infotravel.api.commonv1.dto.ApiBooking;
+import br.com.infotravel.api.commonv1.dto.ApiContact;
+import br.com.infotravel.api.commonv1.dto.ApiName;
 import br.com.infotravel.api.commonv1.dto.ApiToken;
 import br.com.infotravel.api.commonv1.dto.hotel.ApiBookingHotel;
 import br.com.infotravel.api.commonv1.dto.hotel.ApiHotel;
 import br.com.infotravel.api.commonv1.dto.hotel.ApiHotelAvail;
 import br.com.infotravel.api.commonv1.dto.hotel.ApiRoom;
 import br.com.infotravel.api.commonv1.requests.AuthenticationRQ;
+import br.com.infotravel.api.commonv1.requests.BookingRQ;
 import br.com.infotravel.api.commonv1.requests.HotelAvailabilityRQ;
 import br.com.infotravel.api.commonv1.responses.BookingRS;
 import br.com.infotravel.api.commonv1.responses.HotelAvailbilityRS;
-import java.io.IOException;
+import br.com.infotravel.api.commonv1.utils.Utils;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  *
@@ -34,7 +38,9 @@ public class Teste {
         }
     }
 
-    public static void testeHotel(ApiToken token) throws Exception {
+    public static void testeHotel() throws Exception {
+        //monta token
+        ApiToken token = chamaAuthentication();
         //monta request
         HotelAvailabilityRQ availabilityDestinationRQ = new HotelAvailabilityRQ("2024-11-10", "2024-11-20", "2", "2705", null);
         HotelAvailbilityRS hotelAvailbilityRS = httpClientService.hotelAvailability(availabilityDestinationRQ, token.getAccessToken());
@@ -42,8 +48,10 @@ public class Teste {
             for (ApiHotelAvail avail : hotelAvailbilityRS.getApiHotelAvailList()) {
                 System.out.println("Hotel " + avail.getHotel().getName() + " " + avail.getProvider());
             }
+            //MONTA BOOKING
             ApiBooking booking = montaBookingHotel(hotelAvailbilityRS.getApiHotelAvailList().get(0));
-            chamaCheckRates(booking);
+            booking = chamaCheckRates(booking, token.getAccessToken());
+            //BOOKING
             chamaBooking(booking);
         }
     }
@@ -54,13 +62,34 @@ public class Teste {
         return token;
     }
 
-    public static void chamaCheckRates(ApiBooking booking) {
-        BookingRS rs = httpClientService.authenticate(new );
-        return token;
+    public static ApiBooking chamaCheckRates(ApiBooking booking, String token) throws Exception {
+        BookingRS rs = httpClientService.checkRates(new BookingRQ(booking), token);
+        return rs.getBooking();
     }
 
     public static void chamaBooking(ApiBooking booking) {
+        //IMPLEMENTA CONTATO
+        booking.setContact(new ApiContact("Teste da silva", "teste@teste.com.br", "11942232322"));
+        //IMPLEMENTA NOMES
+        if (booking.getBookingHotels() != null) {
+            for (ApiBookingHotel bookingHotel : booking.getBookingHotels()) {
+                ApiRoom room = bookingHotel.getRooms().get(0);
+                preencheNome(room.getNames());
+            }
+        }
+    }
 
+    public static void preencheNome(List<ApiName> names) {
+        ApiName name = names.get(0);
+        name.setFirstName("JOAO");
+        name.setLastName("SILVA");
+        name.setBirth(Utils.formatDate("01/12/1987"));
+        name.setAge(36);
+        name = names.get(1);
+        name.setFirstName("MARIA");
+        name.setLastName("SILVA");
+        name.setBirth(Utils.formatDate("01/12/1987"));
+        name.setAge(36);
     }
 
     public static ApiBooking montaBookingHotel(ApiHotelAvail hotelAvail) {
@@ -74,21 +103,3 @@ public class Teste {
         return booking;
     }
 }
-//{
-//    "booking": {
-//        "id": 132,
-//        "contact": {
-//            "name": "John Doe",
-//            "email": "johndoe@test.com",
-//            "telephone": "5511999999999"
-//        },
-//        "bookingHotels": [
-//            {
-//                "hotel": {
-//                    "id": 207684
-//                },
-//                "rooms": [
-//                    {
-//                        "key": "COEKKCCCZ%FZBC1ZZZ",
-//                        "names": [
-//                            {
