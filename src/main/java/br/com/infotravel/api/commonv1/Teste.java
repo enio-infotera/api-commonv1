@@ -17,12 +17,12 @@ import java.io.IOException;
 public class Teste {
 
     public static void main(String[] args) {
-        String baseUrl = "https://visualturismo.infotravel.com.br/infotravel/api/v1";
+        String baseUrl = "http://develop.dev-infotravel.com.br/infotravel/api/v1";
         HttpClientService httpClientService = new HttpClientService(baseUrl);
 
         try {
 
-            AuthenticationRQ authenticationRQ = new AuthenticationRQ("visualtestws", "61FCbA@_lIi1", "2", "VISUAL", "pt_br");
+            AuthenticationRQ authenticationRQ = new AuthenticationRQ("123", "123", "2", "DEVELOP", "pt_br");
 
             ApiToken token = httpClientService.authenticate(authenticationRQ);
             System.out.println("Token obtido: " + token.getAccessToken());
