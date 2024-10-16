@@ -5,13 +5,16 @@
 package br.com.infotravel.api.commonv1;
 
 import br.com.infotravel.api.commonv1.dto.ApiToken;
+import br.com.infotravel.api.commonv1.requests.ActivityAvailabilityRQ;
 import br.com.infotravel.api.commonv1.requests.AuthenticationRQ;
 import br.com.infotravel.api.commonv1.requests.BookingRQ;
 import br.com.infotravel.api.commonv1.requests.HotelAvailabilityRQ;
 import br.com.infotravel.api.commonv1.responses.BookingRS;
 import br.com.infotravel.api.commonv1.responses.HotelAvailbilityRS;
+import br.com.infotravel.api.commonv1.responses.TourAvailbilityRS;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.json.JsonMapper;
+
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
@@ -24,7 +27,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 /**
- *
  * @author enioj
  */
 public class HttpClientService {
@@ -77,6 +79,34 @@ public class HttpClientService {
         if (response.statusCode() == 200) {
             String rs = response.body();
             return convertFromJson(rs, HotelAvailbilityRS.class);
+        } else {
+            throw new RuntimeException("Authentication failed: " + response.body());
+        }
+    }
+
+
+    /**
+     *
+     */
+    public TourAvailbilityRS tourAvail(ActivityAvailabilityRQ availabilityRQ, String accessToken) throws IOException, InterruptedException {
+        String authUrl = buildUri(baseUrl + "/avail/activity", availabilityRQ.getUrlParams());
+
+        String requestBody = convertToJson(availabilityRQ);
+
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(authUrl))
+                .header("Content-Type", "application/json")
+                .header("Authorization", "Bearer " + accessToken)
+                .GET()
+                .build();
+
+        System.out.println(authUrl);
+        HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+
+
+        if (response.statusCode() == 200) {
+            String rs = response.body();
+            return convertFromJson(rs, TourAvailbilityRS.class);
         } else {
             throw new RuntimeException("Authentication failed: " + response.body());
         }
