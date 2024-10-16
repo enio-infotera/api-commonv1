@@ -52,7 +52,7 @@ public class Teste {
             ApiBooking booking = montaBookingHotel(hotelAvailbilityRS.getApiHotelAvailList().get(0));
             booking = chamaCheckRates(booking, token.getAccessToken());
             //BOOKING
-            chamaBooking(booking);
+            chamaBooking(booking, token.getAccessToken());
         }
     }
 
@@ -67,7 +67,7 @@ public class Teste {
         return rs.getBooking();
     }
 
-    public static void chamaBooking(ApiBooking booking) {
+    public static ApiBooking chamaBooking(ApiBooking booking, String token) throws Exception {
         //IMPLEMENTA CONTATO
         booking.setContact(new ApiContact("Teste da silva", "teste@teste.com.br", "11942232322"));
         //IMPLEMENTA NOMES
@@ -77,6 +77,9 @@ public class Teste {
                 preencheNome(room.getNames());
             }
         }
+        BookingRS rs = httpClientService.booking(new BookingRQ(booking), token);
+        System.out.println("BOOKING " + rs.getBooking().getId() + " STATUS " + rs.getBooking().getStatus().name());
+        return rs.getBooking();
     }
 
     public static void preencheNome(List<ApiName> names) {
