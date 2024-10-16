@@ -15,6 +15,7 @@ import br.com.infotravel.api.commonv1.requests.BookingRQ;
 import br.com.infotravel.api.commonv1.requests.HotelAvailabilityRQ;
 import br.com.infotravel.api.commonv1.responses.BookingRS;
 import br.com.infotravel.api.commonv1.responses.HotelAvailbilityRS;
+import br.com.infotravel.api.commonv1.responses.HotelDetailRS;
 import br.com.infotravel.api.commonv1.utils.Utils;
 import java.util.Arrays;
 import java.util.List;
@@ -66,6 +67,11 @@ public class TesteHotel {
                 if (hotelAvailbilityRS.getApiHotelAvailList() != null && !hotelAvailbilityRS.getApiHotelAvailList().isEmpty()) {
 
                     ApiHotelAvail hotelAvail = hotelAvailbilityRS.getApiHotelAvailList().get(0);
+
+                    // Busca os detalhes do hotel como fotos, facilidades, descrições... pela keyDetail do hotel.
+                    // Detalhes usados apenas para exibição em tela, não é necessário para criação da reserva.
+                    HotelDetailRS hotelDetailResponse = infotravelClient.hotelDetail(hotelAvail.getHotel().getKeyDetail(), token);
+                    System.out.println(hotelDetailResponse.getHotel().getImages());
 
                     if (hotelAvail.getRoomGroups().get(0).getRooms().get(0).getCancellationPolicies().isImmediateFine()
                             || !hotelAvail.getRoomGroups().get(0).getRooms().get(0).getCancellationPolicies().isRefundable()) {

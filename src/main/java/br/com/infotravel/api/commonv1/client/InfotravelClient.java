@@ -10,6 +10,7 @@ import br.com.infotravel.api.commonv1.requests.HotelAvailabilityRQ;
 import br.com.infotravel.api.commonv1.requests.TicketAvailabilityRQ;
 import br.com.infotravel.api.commonv1.responses.BookingRS;
 import br.com.infotravel.api.commonv1.responses.HotelAvailbilityRS;
+import br.com.infotravel.api.commonv1.responses.HotelDetailRS;
 import br.com.infotravel.api.commonv1.responses.TicketAvailbilityRS;
 import br.com.infotravel.api.commonv1.responses.TourAvailbilityRS;
 
@@ -34,6 +35,11 @@ public class InfotravelClient {
     public HotelAvailbilityRS hotelAvailability(HotelAvailabilityRQ request, ApiToken token) throws ApiException {
         String url = httpClientService.buildUri(baseUrl + "/avail/hotel", request.getUrlParams());
         return httpClientService.sendRequest(url, request, HotelAvailbilityRS.class, "GET", token);
+    }
+
+    public HotelDetailRS hotelDetail(String hotelKey, ApiToken token) throws ApiException {
+        String url = baseUrl + "/utility/hotelDetail/" + hotelKey;
+        return httpClientService.sendRequest(url, null, HotelDetailRS.class, "GET", token);
     }
 
     public TourAvailbilityRS tourAvail(ActivityAvailabilityRQ request, ApiToken token) throws ApiException {
