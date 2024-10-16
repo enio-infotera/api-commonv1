@@ -80,7 +80,7 @@ public class TestServico {
 
     public static List<ApiName> montaNomes(List<ApiName> names) {
         ApiName name = names.get(0);
-        name.setFirstName("JOAO");
+        name.setFirstName("SILVA");
         name.setLastName("Gomes");
         name.setBirth(Utils.toDate("1987-12-01", "yyyy-MM-dd"));
         name.setAge(36);
@@ -111,6 +111,7 @@ public class TestServico {
 
             ApiBookingTour bookingTourCheckRate = bookingCheckRate.getBookingTours().get(0);
 
+            booking.setId(bookingCheckRate.getId());
 
             ApiBookingTour bookingTour = new ApiBookingTour(new ApiTour(bookingTourCheckRate.getTour().getKey()), bookingTourCheckRate.getTour().getDate(), montaNomes(bookingTourCheckRate.getNames()));
 
