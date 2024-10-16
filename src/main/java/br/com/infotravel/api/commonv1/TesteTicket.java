@@ -146,6 +146,7 @@ public class TesteTicket {
 
     public static ApiBooking montaBooking(ApiBooking checkRateBooking) {
         ApiBooking booking = new ApiBooking();
+        booking.setId(checkRateBooking.getId());
 
         //IMPLEMENTA CONTATO
         booking.setContact(new ApiContact("Teste da silva", "teste@teste.com.br", "11942232322"));
