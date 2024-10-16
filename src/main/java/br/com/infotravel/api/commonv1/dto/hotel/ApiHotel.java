@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 public class ApiHotel {
 
     private Integer id;
+    private String externalCode;
     private String keyDetail;
     private String name;
     private String description;
@@ -69,6 +70,14 @@ public class ApiHotel {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getExternalCode() {
+        return externalCode;
+    }
+
+    public void setExternalCode(String externalCode) {
+        this.externalCode = externalCode;
     }
 
     public String getKeyDetail() {
