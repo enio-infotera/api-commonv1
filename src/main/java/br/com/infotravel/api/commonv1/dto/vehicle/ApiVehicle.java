@@ -8,7 +8,7 @@ package br.com.infotravel.api.commonv1.dto.vehicle;
 import br.com.infotravel.api.commonv1.dto.ApiImage;
 import br.com.infotravel.api.commonv1.utils.CustomDateSerializer;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.io.Serializable;
 import java.util.Date;
@@ -33,7 +33,7 @@ public class ApiVehicle implements Serializable {
     private Date pickUpDate;
     @JsonSerialize(using = CustomDateSerializer.class)
     private Date dropOffDate;
-    @JsonProperty("class")
+    @SerializedName("class")
     private String nmClasse;
     private String model;
     private List<ApiVehicleDetail> vehicleDetails;

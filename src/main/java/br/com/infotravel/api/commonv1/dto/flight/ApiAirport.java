@@ -8,7 +8,7 @@ package br.com.infotravel.api.commonv1.dto.flight;
 import br.com.infotravel.api.commonv1.dto.ApiCity;
 import br.com.infotravel.api.commonv1.dto.ApiCoordinates;
 import br.com.infotravel.api.commonv1.dto.ApiTerminal;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
 
 /**
  *
@@ -22,7 +22,7 @@ public class ApiAirport {
     private String code;
     private String airportName;
     private ApiCity city;
-    @JsonProperty("terminal")
+    @SerializedName("terminal")
     private ApiTerminal terminal;
 
     private ApiCoordinates coordinates;

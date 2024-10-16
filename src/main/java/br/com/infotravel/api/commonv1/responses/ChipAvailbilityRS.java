@@ -2,14 +2,14 @@ package br.com.infotravel.api.commonv1.responses;
 
 import br.com.infotravel.api.commonv1.dto.chip.ApiChipAvail;
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ChipAvailbilityRS {
 
-    @JsonProperty("chipAvail")
+    @SerializedName("chipAvail")
     private List<ApiChipAvail> chipAvailList;
     private String message;
 

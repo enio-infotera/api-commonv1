@@ -6,7 +6,7 @@
 package br.com.infotravel.api.commonv1.responses;
 
 import br.com.infotravel.api.commonv1.dto.packages.ApiPackageAvail;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 /**
@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class PackageAvailbilityRS {
 
-    @JsonProperty("packageAvails")
+    @SerializedName("packageAvails")
     private List<ApiPackageAvail> packageAvails;
     private String message;
 

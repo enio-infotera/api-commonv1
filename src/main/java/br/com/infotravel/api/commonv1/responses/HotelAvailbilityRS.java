@@ -6,7 +6,6 @@
 package br.com.infotravel.api.commonv1.responses;
 
 import br.com.infotravel.api.commonv1.dto.hotel.ApiHotelAvail;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
@@ -14,11 +13,12 @@ import java.util.List;
  * @author enioj
  */
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.google.gson.annotations.SerializedName;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class HotelAvailbilityRS {
 
-    @JsonProperty("hotelAvail")
+    @SerializedName("hotelAvail")
     private List<ApiHotelAvail> apiHotelAvailList;
     private String message;
 

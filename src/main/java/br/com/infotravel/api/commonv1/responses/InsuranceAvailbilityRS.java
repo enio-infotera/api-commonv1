@@ -6,7 +6,7 @@
 package br.com.infotravel.api.commonv1.responses;
 
 import br.com.infotravel.api.commonv1.dto.insurance.ApiInsuranceAvail;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
 /**
@@ -18,7 +18,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class InsuranceAvailbilityRS {
 
-    @JsonProperty("insuranceAvail")
+    @SerializedName("insuranceAvail")
     private List<ApiInsuranceAvail> apiInsuranceAvailList;
     private String message;
 
