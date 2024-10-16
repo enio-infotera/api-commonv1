@@ -27,20 +27,20 @@ import java.util.logging.Logger;
  * @author arquimedes
  */
 public class TesteHotel {
-
+    
     private static final String username = "username";
     private static final String password = "password";
     private static final String client = "CLIENT_SG";
     private static final String agency = "2";
     private static final String language = "pt_br";
-
+    
     private static final String baseUrl = "http://develop.dev-infotravel.com.br/infotravel/api/v1";
     private static InfotravelClient infotravelClient = new InfotravelClient(baseUrl);
-
+    
     public static void main(String[] args) {
         testeHotel();
     }
-
+    
     public static void testeHotel() {
         try {
             ApiToken token = chamaAuthentication();
@@ -49,7 +49,7 @@ public class TesteHotel {
             // Chama a pesquisa para são paulo id: 2802
             HotelAvailabilityRQ availabilityDestinationRQ = new HotelAvailabilityRQ("2024-11-10", "2024-11-11", "2", "2802", null);
             HotelAvailbilityRS availabilityDestinationRS = infotravelClient.hotelAvailability(availabilityDestinationRQ, token);
-
+            
             if (availabilityDestinationRS != null && availabilityDestinationRS.getApiHotelAvailList() != null && !availabilityDestinationRS.getApiHotelAvailList().isEmpty()) {
                 for (ApiHotelAvail avail : availabilityDestinationRS.getApiHotelAvailList()) {
                     System.out.println("Hotel '" + avail.getHotel().getId() + "' '" + avail.getHotel().getName() + "' '" + avail.getProvider() + "'");
@@ -57,22 +57,22 @@ public class TesteHotel {
 
                 // Pega o primeiro hotel e chama o detalhe separado desse hotel
                 ApiHotelAvail apiHotelAvailDestination = availabilityDestinationRS.getApiHotelAvailList().get(0);
-
+                
                 System.out.println("Hotel '" + apiHotelAvailDestination.getHotel().getId() + "' '" + apiHotelAvailDestination.getHotel().getName() + "' '" + apiHotelAvailDestination.getProvider() + "'");
 
                 // Pesquisa pelo id do hotel
                 HotelAvailabilityRQ availabilityHotelRQ = new HotelAvailabilityRQ("2024-11-10", "2024-11-11", "2", null, apiHotelAvailDestination.getHotel().getId().toString());
                 HotelAvailbilityRS hotelAvailbilityRS = infotravelClient.hotelAvailability(availabilityHotelRQ, token);
-
+                
                 if (hotelAvailbilityRS.getApiHotelAvailList() != null && !hotelAvailbilityRS.getApiHotelAvailList().isEmpty()) {
-
+                    
                     ApiHotelAvail hotelAvail = hotelAvailbilityRS.getApiHotelAvailList().get(0);
 
                     // Busca os detalhes do hotel como fotos, facilidades, descrições... pela keyDetail do hotel.
                     // Detalhes usados apenas para exibição em tela, não é necessário para criação da reserva.
                     HotelDetailRS hotelDetailResponse = infotravelClient.hotelDetail(hotelAvail.getHotel().getKeyDetail(), token);
                     System.out.println(hotelDetailResponse.getHotel().getImages());
-
+                    
                     if (hotelAvail.getRoomGroups().get(0).getRooms().get(0).getCancellationPolicies().isImmediateFine()
                             || !hotelAvail.getRoomGroups().get(0).getRooms().get(0).getCancellationPolicies().isRefundable()) {
                         throw new RuntimeException("O primeiro hotel retornado tem politica de cancelamento não reembolsavel.");
@@ -107,45 +107,45 @@ public class TesteHotel {
             Logger.getLogger(TesteHotel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
     public static ApiToken chamaAuthentication() throws ApiException {
         AuthenticationRQ authenticationRQ = new AuthenticationRQ(username, password, agency, client, language);
-
+        
         ApiToken token = infotravelClient.authenticate(authenticationRQ);
         return token;
     }
-
+    
     public static ApiBooking chamaCheckRate(ApiBooking booking, ApiToken token) throws ApiException {
         BookingRS rs = infotravelClient.checkRate(new BookingRQ(booking), token);
         return rs.getBooking();
     }
-
+    
     public static ApiBooking chamaBooking(ApiBooking booking, ApiToken token) throws ApiException {
         BookingRS rs = infotravelClient.booking(new BookingRQ(booking), token);
-
+        
         return rs.getBooking();
     }
-
+    
     public static ApiBooking buscaBooking(Integer bookingId, ApiToken token) throws ApiException {
         ApiBooking rs = infotravelClient.findBooking(bookingId, token);
-
+        
         return rs;
     }
-
+    
     public static void preencheNome(List<ApiName> names) {
         ApiName name = names.get(0);
         name.setFirstName("JOAO");
         name.setLastName("SILVA");
         name.setBirth(Utils.toDate("1987-12-01", "yyyy-MM-dd"));
         name.setAge(36);
-
+        
         name = names.get(1);
         name.setFirstName("MARIA");
         name.setLastName("SILVA");
         name.setBirth(Utils.toDate("1987-12-01", "yyyy-MM-dd"));
         name.setAge(36);
     }
-
+    
     public static ApiBooking montaBookingHotelAvail(ApiHotelAvail hotelAvail) {
         ApiBooking booking = new ApiBooking();
         if (hotelAvail != null) {
@@ -156,15 +156,16 @@ public class TesteHotel {
         }
         return booking;
     }
-
+    
     public static ApiBooking montaBooking(ApiBooking checkRateBooking) {
         ApiBooking booking = new ApiBooking();
-
+        booking.setId(checkRateBooking.getId());
+        
         //IMPLEMENTA CONTATO
         booking.setContact(new ApiContact("Teste da silva", "teste@teste.com.br", "11942232322"));
-
+        
         if (checkRateBooking.getBookingHotels() != null && !checkRateBooking.getBookingHotels().isEmpty()) {
-
+            
             ApiBookingHotel apiBookingHotelCheckRate = checkRateBooking.getBookingHotels().get(0);
 
             // monta objeto de bookings limpo para a chamada do /booking
@@ -177,11 +178,11 @@ public class TesteHotel {
             for (ApiRoom room : bookingHotel.getRooms()) {
                 preencheNome(room.getNames());
             }
-
+            
             booking.setBookingHotels(Arrays.asList(bookingHotel));
         }
-
+        
         return booking;
     }
-
+    
 }
