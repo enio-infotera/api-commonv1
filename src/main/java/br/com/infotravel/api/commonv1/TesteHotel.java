@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package br.com.infotravel.api.commonv1;
 
-import static br.com.infotravel.api.commonv1.TesteTicket.chamaAuthentication;
-import static br.com.infotravel.api.commonv1.TesteTicket.chamaCheckRate;
-import static br.com.infotravel.api.commonv1.TesteTicket.montaBookingTicketAvail;
-import static br.com.infotravel.api.commonv1.TesteTicket.preencheNome;
 import br.com.infotravel.api.commonv1.client.InfotravelClient;
 import br.com.infotravel.api.commonv1.dto.ApiBooking;
 import br.com.infotravel.api.commonv1.dto.ApiContact;
@@ -17,8 +9,6 @@ import br.com.infotravel.api.commonv1.dto.hotel.ApiBookingHotel;
 import br.com.infotravel.api.commonv1.dto.hotel.ApiHotel;
 import br.com.infotravel.api.commonv1.dto.hotel.ApiHotelAvail;
 import br.com.infotravel.api.commonv1.dto.hotel.ApiRoom;
-import br.com.infotravel.api.commonv1.dto.ticket.ApiBookingTicket;
-import br.com.infotravel.api.commonv1.dto.ticket.ApiTicket;
 import br.com.infotravel.api.commonv1.exceptions.ApiException;
 import br.com.infotravel.api.commonv1.requests.AuthenticationRQ;
 import br.com.infotravel.api.commonv1.requests.BookingRQ;
@@ -33,7 +23,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author enioj
+ * @author arquimedes
  */
 public class TesteHotel {
 
@@ -106,9 +96,9 @@ public class TesteHotel {
                 System.out.println("no availability");
             }
         } catch (ApiException ex) {
-            Logger.getLogger(TesteTicket.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TesteHotel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (InterruptedException ex) {
-            Logger.getLogger(TesteTicket.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TesteHotel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
