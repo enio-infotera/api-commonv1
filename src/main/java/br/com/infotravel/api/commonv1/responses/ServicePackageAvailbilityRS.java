@@ -1,7 +1,7 @@
 package br.com.infotravel.api.commonv1.responses;
 
 import br.com.infotravel.api.commonv1.dto.servicepackage.ApiServicePackageAvail;
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ServicePackageAvailbilityRS {
 
-    @SerializedName("servicePackageAvail")
+    @JsonProperty("servicePackageAvail")
     private List<ApiServicePackageAvail> servicePackageAvails;
     private String message;
 

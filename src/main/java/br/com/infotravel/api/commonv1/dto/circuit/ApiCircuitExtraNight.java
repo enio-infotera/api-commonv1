@@ -1,7 +1,7 @@
 package br.com.infotravel.api.commonv1.dto.circuit;
 
 import br.com.infotravel.api.commonv1.utils.CustomDateSerializer;
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.util.Date;

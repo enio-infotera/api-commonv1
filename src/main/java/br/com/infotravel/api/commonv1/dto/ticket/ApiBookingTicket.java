@@ -46,22 +46,15 @@ public class ApiBookingTicket {
     public ApiBookingTicket() {
     }
 
-    public ApiBookingTicket(ApiTicket ticket, Date dateSelected, List<ApiName> names, ApiTicketModalitie modalitie) {
+    public ApiBookingTicket(ApiTicket ticket, List<ApiName> names, ApiTicketModalitie modalitie) {
         this.ticket = ticket;
         this.names = names;
         this.modalitie = modalitie;
     }
 
-    public ApiBookingTicket(List<ApiLocator> locators, ApiTicket ticket, List<ApiName> names, List<ApiFare> fares, String provider, List<ApiPolicy> policies, ApiCancellationPolicy cancellationPolicies, BookingStatus status, BookingStatus providerStatus) {
-        this.locators = locators;
+    public ApiBookingTicket(ApiTicket ticket, List<ApiName> names) {
         this.ticket = ticket;
         this.names = names;
-        this.fares = fares;
-        this.provider = provider;
-        this.policies = policies;
-        this.cancellationPolicies = cancellationPolicies;
-        this.status = status;
-        this.providerStatus = providerStatus;
     }
 
     public BookingStatus getStatus() {

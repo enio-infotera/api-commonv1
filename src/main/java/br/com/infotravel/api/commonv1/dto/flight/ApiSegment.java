@@ -3,7 +3,7 @@ package br.com.infotravel.api.commonv1.dto.flight;
 import br.com.infotravel.api.commonv1.enumerators.FlightClassType;
 import br.com.infotravel.api.commonv1.enumerators.FlightType;
 import br.com.infotravel.api.commonv1.utils.CustomDateSerializer;
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Date;
 
@@ -24,7 +24,7 @@ public class ApiSegment {
     private Date arrival;
     private String classCode;
     private FlightType flightType;
-    @SerializedName("class")
+    @JsonProperty("class")
     private FlightClassType flightClass;
     private ApiBaggage baggage;
     private String duration;

@@ -14,7 +14,7 @@ import br.com.infotravel.api.commonv1.dto.transfer.ApiTransferAvail;
 import br.com.infotravel.api.commonv1.dto.insurance.ApiInsuranceAvail;
 import br.com.infotravel.api.commonv1.dto.hotel.ApiHotelAvail;
 import br.com.infotravel.api.commonv1.dto.flight.ApiFlightAvail;
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 
@@ -27,7 +27,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiPackageAvail {
 
-    @SerializedName("package")
+    @JsonProperty("package")
     private ApiPackage apiPackage;
 
     

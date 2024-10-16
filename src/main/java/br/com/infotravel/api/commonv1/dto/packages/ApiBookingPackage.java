@@ -20,7 +20,7 @@ import br.com.infotravel.api.commonv1.dto.insurance.ApiBookingInsurance;
 import br.com.infotravel.api.commonv1.dto.hotel.ApiBookingHotel;
 import br.com.infotravel.api.commonv1.dto.flight.ApiBookingFlight;
 import br.com.infotravel.api.commonv1.dto.vehicle.ApiBookingVehicle;
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
 
 /**
@@ -32,7 +32,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiBookingPackage {
 
-    @SerializedName("package")
+    @JsonProperty("package")
     private ApiPackage apiPackage;
 
     private List<ApiBookingHotel> bookingHotels;

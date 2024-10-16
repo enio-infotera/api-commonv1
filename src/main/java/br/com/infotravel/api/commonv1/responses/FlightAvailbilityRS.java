@@ -1,7 +1,7 @@
 package br.com.infotravel.api.commonv1.responses;
 
 import br.com.infotravel.api.commonv1.dto.flight.ApiFlightAvail;
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class FlightAvailbilityRS {
 
-    @SerializedName("flightAvail")
+    @JsonProperty("flightAvail")
     private List<ApiFlightAvail> apiFlightAvails;
     private String message;
 

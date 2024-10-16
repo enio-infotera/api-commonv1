@@ -13,12 +13,12 @@ import java.util.List;
  * @author enioj
  */
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class HotelAvailbilityRS {
 
-    @SerializedName("hotelAvail")
+    @JsonProperty("hotelAvail")
     private List<ApiHotelAvail> apiHotelAvailList;
     private String message;
 

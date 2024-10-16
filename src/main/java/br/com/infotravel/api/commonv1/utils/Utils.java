@@ -6,6 +6,7 @@
 package br.com.infotravel.api.commonv1.utils;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -50,6 +51,18 @@ public class Utils {
         } catch (DateTimeParseException e) {
             return null;
         }
+    }
+    
+    public static Date toDate(String value, String format) {
+        Date result = null;
+        if (!isNothing(value)) {
+            try {
+                DateFormat formatter = new SimpleDateFormat(format);
+                result = (Date) formatter.parse(value);
+            } catch (ParseException ex) {
+            }
+        }
+        return result;
     }
 
     public static String removeSpecialCharactersAndSpaces(String str) {

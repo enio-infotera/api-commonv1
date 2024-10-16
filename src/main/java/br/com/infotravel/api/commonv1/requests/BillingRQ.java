@@ -4,7 +4,7 @@
  */
 package br.com.infotravel.api.commonv1.requests;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  *
@@ -15,11 +15,11 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class BillingRQ {
 
-    @SerializedName(value = "imageContent")
+    @JsonProperty(value = "imageContent")
     private byte[] btConteudo;
-    @SerializedName(value = "imageName")
+    @JsonProperty(value = "imageName")
     private String nmImagem;
-    @SerializedName(value = "credentialID")
+    @JsonProperty(value = "credentialID")
     private Integer idIntegradorCredencial;
 
     public BillingRQ() {

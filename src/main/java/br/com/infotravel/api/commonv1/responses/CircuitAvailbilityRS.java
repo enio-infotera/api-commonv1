@@ -1,13 +1,13 @@
 package br.com.infotravel.api.commonv1.responses;
 
 import br.com.infotravel.api.commonv1.dto.circuit.ApiCircuitAvail;
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
 public class CircuitAvailbilityRS {
 
-    @SerializedName("circuitAvail")
+    @JsonProperty("circuitAvail")
     private List<ApiCircuitAvail> apiCircuitAvailList;
     private String message;
 

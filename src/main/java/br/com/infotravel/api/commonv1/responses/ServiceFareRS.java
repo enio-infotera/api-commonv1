@@ -4,7 +4,7 @@
  */
 package br.com.infotravel.api.commonv1.responses;
 
-import com.google.gson.annotations.SerializedName;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  *
@@ -15,7 +15,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ServiceFareRS {
 
-    @SerializedName("serviceFareId")
+    @JsonProperty("serviceFareId")
     private Integer id;
 
     public ServiceFareRS(Integer id) {
