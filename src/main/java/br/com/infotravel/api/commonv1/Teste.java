@@ -12,6 +12,7 @@ import br.com.infotravel.api.commonv1.dto.hotel.ApiHotelAvail;
 import br.com.infotravel.api.commonv1.dto.hotel.ApiRoom;
 import br.com.infotravel.api.commonv1.requests.AuthenticationRQ;
 import br.com.infotravel.api.commonv1.requests.HotelAvailabilityRQ;
+import br.com.infotravel.api.commonv1.responses.BookingRS;
 import br.com.infotravel.api.commonv1.responses.HotelAvailbilityRS;
 import java.io.IOException;
 import java.util.Arrays;
@@ -54,7 +55,8 @@ public class Teste {
     }
 
     public static void chamaCheckRates(ApiBooking booking) {
-
+        BookingRS rs = httpClientService.authenticate(new );
+        return token;
     }
 
     public static void chamaBooking(ApiBooking booking) {
