@@ -94,15 +94,16 @@ public class TesteCircuito {
                         // Caso retorne ok o checkRate, faz a reserva
                         if (responseCheckRate.getBookingCircuits() != null && !responseCheckRate.getBookingCircuits().isEmpty()) {
 
+                            // COMENTADO GERAÇãO DA RESERVA POR SEGURANÇA
                             // Cria a reserva
-                            ApiBooking requestBooking = montaBooking(responseCheckRate);
-                            ApiBooking responseBooking = chamaBooking(requestBooking, token);
-                            System.out.println("BOOKING '" + responseBooking.getId() + "' STATUS '" + responseBooking.getStatus().name() + "' ");
-
+//                            ApiBooking requestBooking = montaBooking(responseCheckRate);
+//                            ApiBooking responseBooking = chamaBooking(requestBooking, token);
+//                            System.out.println("BOOKING '" + responseBooking.getId() + "' STATUS '" + responseBooking.getStatus().name() + "' ");
+//
                             Thread.sleep(5000);
-                            // Consulta a reserva após um tempinho
-                            ApiBooking findBookingResponse = buscaBooking(responseBooking.getId(), token);
-                            System.out.println("FIND BOOKING '" + findBookingResponse.getId() + "' STATUS '" + findBookingResponse.getStatus().name() + "' ");
+//                            // Consulta a reserva após um tempinho
+//                            ApiBooking findBookingResponse = buscaBooking(responseBooking.getId(), token);
+//                            System.out.println("FIND BOOKING '" + findBookingResponse.getId() + "' STATUS '" + findBookingResponse.getStatus().name() + "' ");
                         }
                     } else {
                         System.out.println("Dia '" + responseCalendar.getDates().get(0).getStart() + "' não disponível");
