@@ -6,9 +6,13 @@ import br.com.infotravel.api.commonv1.exceptions.ApiException;
 import br.com.infotravel.api.commonv1.requests.ActivityAvailabilityRQ;
 import br.com.infotravel.api.commonv1.requests.AuthenticationRQ;
 import br.com.infotravel.api.commonv1.requests.BookingRQ;
+import br.com.infotravel.api.commonv1.requests.CircuitAvailabilityRQ;
 import br.com.infotravel.api.commonv1.requests.HotelAvailabilityRQ;
 import br.com.infotravel.api.commonv1.requests.TicketAvailabilityRQ;
 import br.com.infotravel.api.commonv1.responses.BookingRS;
+import br.com.infotravel.api.commonv1.responses.CircuitAvailabilityRS;
+import br.com.infotravel.api.commonv1.responses.CircuitCalendarRS;
+import br.com.infotravel.api.commonv1.responses.CircuitDailyDetailRS;
 import br.com.infotravel.api.commonv1.responses.HotelAvailbilityRS;
 import br.com.infotravel.api.commonv1.responses.HotelDetailRS;
 import br.com.infotravel.api.commonv1.responses.TicketAvailbilityRS;
@@ -51,6 +55,25 @@ public class InfotravelClient {
         String url = httpClientService.buildUri(baseUrl + "/avail/ticket", request.getUrlParams());
         return httpClientService.sendRequest(url, request, TicketAvailbilityRS.class, "GET", token);
     }
+
+    //
+    //
+    public CircuitAvailabilityRS circuitAvailability(CircuitAvailabilityRQ request, ApiToken token) throws ApiException {
+        String url = httpClientService.buildUri(baseUrl + "/avail/circuit", request.getUrlParams());
+        return httpClientService.sendRequest(url, request, CircuitAvailabilityRS.class, "GET", token);
+    }
+
+    public CircuitCalendarRS circuitCalendar(BookingRQ request, ApiToken token) throws ApiException {
+        String url = baseUrl + "/avail/circuit/calendar";
+        return httpClientService.sendRequest(url, request, CircuitCalendarRS.class, "POST", token);
+    }
+
+    public CircuitDailyDetailRS circuitDailyDetails(BookingRQ request, ApiToken token) throws ApiException {
+        String url = baseUrl + "/avail/circuit/daily-details";
+        return httpClientService.sendRequest(url, request, CircuitDailyDetailRS.class, "POST", token);
+    }
+    //
+    //
 
     public BookingRS checkRate(BookingRQ request, ApiToken token) throws ApiException {
         String url = baseUrl + "/checkRate";

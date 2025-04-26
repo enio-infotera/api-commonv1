@@ -46,11 +46,17 @@ public class ApiName {
 
     private List<ApiFare> fares;
 
-    private  String parameter;
+    private String parameter;
 
     private Boolean isMain;
 
     public ApiName() {
+    }
+
+    public ApiName(NameType type, Integer age, GenderType gender) {
+        this.age = age;
+        this.type = type;
+        this.gender = gender;
     }
 
     public ApiName(String firstName, String lastName, Date birth, Integer age, Integer roomNumber, NameType type, ApiDocument document, Boolean isMain) {

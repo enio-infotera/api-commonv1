@@ -1,12 +1,14 @@
 package br.com.infotravel.api.commonv1.dto.circuit;
 
 import br.com.infotravel.api.commonv1.utils.CustomDateSerializer;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.util.Date;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiCircuitExtraNight {
+
     @JsonSerialize(using = CustomDateSerializer.class)
     private Date minInitialDateAvailable; //menor data que a dtInicio do circuito pode ser alterada
 
@@ -29,8 +31,6 @@ public class ApiCircuitExtraNight {
     private Date originalInitialDate; //data de início original do circuito
     @JsonSerialize(using = CustomDateSerializer.class)
     private Date originalFinalDate; //data de fim original do circuito
-
-
 
     public ApiCircuitExtraNight() {
     }

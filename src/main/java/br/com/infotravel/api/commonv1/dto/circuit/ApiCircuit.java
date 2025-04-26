@@ -1,6 +1,5 @@
 package br.com.infotravel.api.commonv1.dto.circuit;
 
-
 import br.com.infotravel.api.commonv1.dto.ApiImage;
 import br.com.infotravel.api.commonv1.dto.hotel.ApiHotel;
 import br.com.infotravel.api.commonv1.dto.packages.ApiRoadMap;
@@ -10,17 +9,23 @@ import java.util.List;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiCircuit {
+
     private String key;
     private String name;
     private String code;
+    private String description;
+    private Integer nights;
     private List<ApiImage> imageList;
     private List<ApiCircuitInfo> infos;
     private List<ApiHotel> hotels;
     private List<ApiRoadMap> roadMap;
     private List<ApiCircuitService> services;
 
-
     public ApiCircuit() {
+    }
+
+    public ApiCircuit(String key) {
+        this.key = key;
     }
 
     public ApiCircuit(String key, String name, String code, List<ApiImage> imageList) {
@@ -54,7 +59,6 @@ public class ApiCircuit {
     public void setCode(String code) {
         this.code = code;
     }
-
 
     public List<ApiImage> getImageList() {
         return imageList;
@@ -94,5 +98,21 @@ public class ApiCircuit {
 
     public void setServices(List<ApiCircuitService> services) {
         this.services = services;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Integer getNights() {
+        return nights;
+    }
+
+    public void setNights(Integer nights) {
+        this.nights = nights;
     }
 }

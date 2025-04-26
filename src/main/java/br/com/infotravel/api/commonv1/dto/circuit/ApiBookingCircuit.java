@@ -1,14 +1,18 @@
 package br.com.infotravel.api.commonv1.dto.circuit;
 
 import br.com.infotravel.api.commonv1.dto.ApiCancellationPolicy;
+import br.com.infotravel.api.commonv1.dto.ApiClient;
 import br.com.infotravel.api.commonv1.dto.ApiContact;
 import br.com.infotravel.api.commonv1.dto.ApiFare;
 import br.com.infotravel.api.commonv1.dto.ApiLocator;
 import br.com.infotravel.api.commonv1.dto.ApiPolicy;
 import br.com.infotravel.api.commonv1.dto.hotel.ApiRoom;
 import br.com.infotravel.api.commonv1.enumerators.BookingStatus;
+import br.com.infotravel.api.commonv1.utils.CustomDateNoHourDeserializer;
+import br.com.infotravel.api.commonv1.utils.CustomDateNoHourSerializer;
 import br.com.infotravel.api.commonv1.utils.CustomDateSerializer;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.util.Date;
@@ -18,44 +22,50 @@ import java.util.List;
 public class ApiBookingCircuit {
 
     private BookingStatus status;
-
     private BookingStatus providerStatus;
     private List<ApiLocator> locators;
+
+    @JsonSerialize(using = CustomDateNoHourSerializer.class)
+    @JsonDeserialize(using = CustomDateNoHourDeserializer.class)
+    private Date dateSelected;
 
     @JsonSerialize(using = CustomDateSerializer.class)
     private Date date;
     @JsonSerialize(using = CustomDateSerializer.class)
     private Date endDate;
     private String provider;
-
+    private ApiClient providerDetail;
     private Integer providerId;
     private ApiCircuit circuit;
+    private List<ApiCircuitDay> dates;
     private List<ApiRoom> rooms;
-
+    private Integer nights;
+    private List<ApiCircuitCategory> categories;
+    private ApiCircuitCategory category;
     private List<ApiContact> contacts;
-
     private List<ApiFare> fares;
-
     private List<ApiPolicy> policies;
     private ApiCancellationPolicy cancellationPolicies;
     private ApiItinerary itinerary;
-
     private boolean available;
-
-
     private Integer destinationId;
     private ApiCircuitExtraNight circuitExtraNight;
     private String textDoc;
     private String urlWebHook;
 
-
     public ApiBookingCircuit() {
     }
-
 
     public ApiBookingCircuit(ApiCircuit circuit, List<ApiRoom> rooms) {
         this.circuit = circuit;
         this.rooms = rooms;
+    }
+
+    // CheckRate
+    public ApiBookingCircuit(ApiCircuit circuit, List<ApiRoom> rooms, ApiCircuitCategory category) {
+        this.circuit = circuit;
+        this.rooms = rooms;
+        this.category = category;
     }
 
     public BookingStatus getStatus() {
@@ -82,6 +92,13 @@ public class ApiBookingCircuit {
         this.locators = locators;
     }
 
+    public Date getDateSelected() {
+        return dateSelected;
+    }
+
+    public void setDateSelected(Date dateSelected) {
+        this.dateSelected = dateSelected;
+    }
 
     public Date getDate() {
         return date;
@@ -89,6 +106,14 @@ public class ApiBookingCircuit {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public List<ApiCircuitDay> getDates() {
+        return dates;
+    }
+
+    public void setDates(List<ApiCircuitDay> dates) {
+        this.dates = dates;
     }
 
     public Date getEndDate() {
@@ -105,6 +130,14 @@ public class ApiBookingCircuit {
 
     public void setProvider(String provider) {
         this.provider = provider;
+    }
+
+    public ApiClient getProviderDetail() {
+        return providerDetail;
+    }
+
+    public void setProviderDetail(ApiClient providerDetail) {
+        this.providerDetail = providerDetail;
     }
 
     public Integer getProviderId() {
@@ -130,7 +163,6 @@ public class ApiBookingCircuit {
     public void setRooms(List<ApiRoom> rooms) {
         this.rooms = rooms;
     }
-
 
     public List<ApiContact> getContacts() {
         return contacts;
@@ -210,5 +242,29 @@ public class ApiBookingCircuit {
 
     public void setUrlWebHook(String urlWebHook) {
         this.urlWebHook = urlWebHook;
+    }
+
+    public List<ApiCircuitCategory> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(List<ApiCircuitCategory> categories) {
+        this.categories = categories;
+    }
+
+    public ApiCircuitCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(ApiCircuitCategory category) {
+        this.category = category;
+    }
+
+    public Integer getNights() {
+        return nights;
+    }
+
+    public void setNights(Integer nights) {
+        this.nights = nights;
     }
 }
